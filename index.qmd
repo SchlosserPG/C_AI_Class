@@ -14,3 +14,63 @@ This page was written in **Quarto** and published straight from GitHub.
 ```{python}
 print("Hello from a rendered code chunk!")
 ```
+
+
+**Dataset:** `campus_cafe_sales.csv` (posted with this assignment). 90 rows of daily sales for three campus cafés over six weekdays.
+
+
+
+
+## Load
+
+```{python}
+import pandas as pd
+import plotly.express as px
+
+sales = pd.read_csv("data/campus_cafe_sales.csv")
+sales.head()
+```
+
+## Inspect
+
+```{python}
+print("Rows and columns:", sales.shape)
+print("Cafes:", sales["cafe"].unique())
+sales.dtypes
+```
+
+## Filter
+
+```{python}
+sales["revenue"] = sales["units_sold"] * sales["unit_price"]
+
+coffee = sales[sales["category"] == "Coffee"]
+coffee.head()
+```
+
+## Plot
+
+```{python}
+daily = coffee.groupby(["date", "cafe"], as_index=False)["revenue"].sum()
+
+px.line(daily, x="date", y="revenue", color="cafe", markers=True,
+        title="Daily coffee revenue by cafe",
+        labels={"date": "Date", "revenue": "Revenue ($)"})
+```
+
+Three things worth knowing while you work:
+
+- `"data/campus_cafe_sales.csv"` is a **relative path** — it is read from wherever `index.qmd` lives, not from wherever your terminal happens to be sitting. Keep it relative rather than pasting in a full `C:\Users\...` path, or the document will render on your machine and nowhere else.
+- The last line of a chunk displays automatically — that is why `sales.head()` sits alone on its own line with no `print()` around it.
+- `#| echo: false` at the top of a chunk hides the code but keeps the output. Use it on at least one chunk if you decide the reader wants the result and not the machinery.
+
+**Add your callout.** A callout is a fenced div — three colons, a class in braces, your text, three colons to close:
+
+````
+::: {.callout-note}
+## Why I filtered to coffee
+
+Coffee is two of the five items but most of the volume, so a revenue
+trend across all categories mostly just shows the coffee trend anyway.
+:::
+````
