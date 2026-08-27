@@ -68,12 +68,10 @@ px.line(daily, x="date", y="revenue", color="cafe", markers=True,
         labels={"date": "Date", "revenue": "Revenue ($)"})
 ```
 
-## Callout 
+## Callout
 
-        
-::: {.callout-note}
+::: callout-note
 ## Why I filtered to coffee
 
-Coffee is two of the five items but most of the volume, so a revenue
-trend across all categories mostly just shows the coffee trend anyway.
+Coffee is two of the five items but most of the volume, so a revenue trend across all categories mostly just shows the coffee trend anyway.
 :::
