@@ -49,7 +49,7 @@ print("Cafes:", sales["cafe"].unique())
 sales.dtypes
 ```
 
-## Filter
+## Calculate Revenue and Filter by Coffee
 
 ```{python}
 sales["revenue"] = sales["units_sold"] * sales["unit_price"]
@@ -68,7 +68,7 @@ px.line(daily, x="date", y="revenue", color="cafe", markers=True,
         labels={"date": "Date", "revenue": "Revenue ($)"})
 ```
 
-**Add your callout.** A callout is a fenced div — three colons, a class in braces, your text, three colons to close:
+## Callout 
 
 ```         
 ::: {.callout-note}
